@@ -1,0 +1,21 @@
+{
+  "name": "week5",
+  "version": "1.0.0",
+  "description": "week 5 project",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "cheerio": "^1.0.0-rc.3",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0",
+    "mongodb": "^3.6.2",
+    "popper.js": "^1.16.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicholas Minnella",
+  "license": "ISC"
+}
