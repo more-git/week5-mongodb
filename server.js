@@ -24,21 +24,26 @@ function connectDB() {
             http.createServer(function (req, res) {
                 var urlObj = url.parse(req.url, true, false);
                 fs.readFile(ROOT_DIR + urlObj.pathname, function (err,data) {
-                    if (err) {  }
-                    var jsonData = "";
-                    req.on('data', function (chunk) {
-                        jsonData += chunk;
-                    });
-                    req.on('end', function () {
-                        if (jsonData) {
-                            var len = jsonData.toString().length;
-                            var substrMsg = jsonData.toString().substr(8, len-1);
-                            addObject(nebulae, {message:substrMsg});
-
-                        }
-                    });
-                    res.writeHead(200);
-                    res.end(data);
+                    if (req.method == "POST") {
+                        if (err) {  }
+                        var jsonData = "";
+                        req.on('data', function (chunk) {
+                            jsonData += chunk;
+                        });
+                        req.on('end', function () {
+                            if (jsonData) {
+                               var len = jsonData.toString().length;
+                               var substrMsg = jsonData.toString().substr(8, len-1);
+                               addObject(nebulae, {message:substrMsg});
+                            }
+                        });
+                        res.writeHead(200);
+                        res.end(data);
+                    } else {
+                        if (err) {  }  
+                        res.writeHead(200);
+                        res.end(data);  
+                  }
                 });
             }).listen(8005);
         });
