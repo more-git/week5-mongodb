@@ -8,10 +8,9 @@ connectDB();
 
 function connectDB() {
     http.createServer(function (req, res) {
-        var urlObj = url.parse(req.url, true, false);
-        fs.readFile(ROOT_DIR + urlObj.pathname, function (err,data) {
-            if (err) {  }
-            if (req.method == "POST") {
+        var urlObj = url.parse(req.url, true, false);                
+        if (req.method == "POST") {
+            fs.readFile(ROOT_DIR + urlObj.pathname, function (err,data) {
                 MongoClient.connect("mongodb://localhost/",{useNewUrlParser: true, useUnifiedTopology: true}, function(err, db) {
                     var myDB = db.db("week5");
                     var inputCollection = myDB.collection("input");
@@ -36,11 +35,13 @@ function connectDB() {
                     res.writeHead(200);
                     res.end(data);
                 });
-            } else {
+            });
+        } else {
+            fs.readFile(ROOT_DIR + urlObj.pathname, function (err,data) {
                 if (err) {  }
                 res.writeHead(200);
                 res.end(data);
-            }
-        });
+            });
+        }
     }).listen(8005);
 }
